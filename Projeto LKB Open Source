@@ -11957,7 +11957,6 @@
 
 
 
-
 local player = game.Players.LocalPlayer
 local leaderstats = player:WaitForChild("leaderstats") -- Espera até que o leaderstats esteja disponível
 local slapCount = leaderstats:WaitForChild("Slaps") -- Espera até que o valor de Slaps esteja disponível
@@ -12128,5 +12127,5 @@ MainSection:CreateToggle("Slap Aura Zombie (Beta)", function(state)
                 wait()
             end
         end
+      end)
     end)
-end)
