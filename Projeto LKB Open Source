@@ -1,0 +1,156 @@
+local ProjetoLKB = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/Coasting%20Ui%20Lib/source.lua"))()
+
+local Main = ProjetoLKB:CreateTab("Farm")
+local Credits = ProjetoLKB:CreateTab("Credits")
+local MainSection = Main:CreateSection("Main")
+local ConfigSection = Main:CreateSection("Config")
+local GG = Credits:CreateSection("Credits Script")
+
+_G.cdtp = 0.5
+_G.cdtp2 = 0.3
+_G.Farming = false
+
+GG:CreateLabel("", "...")
+GG:CreateLabel("", "Made By Projeto_LKB")
+GG:CreateLabel("", "scriptblox.com")
+
+local Safe = false
+
+MainSection:CreateToggle("Auto Farm CandyCorns", function(state)
+    _G.Farming = state
+
+    if _G.Farming then
+        spawn(function() 
+            while _G.Farming do
+                local folder = game.Workspace:FindFirstChild("CandyCorns") 
+                if folder and #folder:GetChildren() > 0 then
+                    for _, part in pairs(folder:GetChildren()) do
+                        if part:IsA("BasePart") then 
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame
+                            wait(_G.cdtp2)
+                        end
+                    end
+                else
+                    local safe = true
+                    if safe == true then
+                        local player = game.Players.LocalPlayer
+                        local character = player.Character or player.CharacterAdded:Wait()
+                        character:SetPrimaryPartCFrame(CFrame.new(-13, 10, -266))
+                    end
+                end
+                wait(_G.cdtp)
+            end
+        end)
+    end
+end)
+
+MainSection:CreateButton("Esp CandyCorns/Candy RGB", function()
+
+    local function Colorido()
+        local time = tick() % 5
+        local hue = time / 5
+        return Color3.fromHSV(hue, 1, 1)
+    end
+
+    local function applyESP(object)
+        if not object:FindFirstChildOfClass("Highlight") then
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = object
+            highlight.FillTransparency = 0.5
+            highlight.OutlineTransparency = 0
+        end
+    end
+
+    local function neymar()
+        while true do
+            local folder = game.Workspace:FindFirstChild("CandyCorns")
+            if folder then
+                for _, object in pairs(folder:GetChildren()) do
+                    if object:IsA("BasePart") then
+                        applyESP(object)
+                        local highlight = object:FindFirstChildOfClass("Highlight")
+                        if highlight then
+                            highlight.FillColor = Colorido()
+                            highlight.OutlineColor = Colorido()
+                        end
+                    end
+                end
+            end
+            wait(0.1) 
+        end
+    end
+    spawn(neymar)
+end)
+
+
+ConfigSection:CreateSlider("Teleport CD 1", 0, 10, _G.cdtp, false, function(value)
+    _G.cdtp = value
+end)
+
+ConfigSection:CreateSlider("Teleport CD 2", 0, 10, _G.cdtp2, false, function(value)
+    _G.cdtp2 = value
+end)
+
+_G.HeadSize = 10
+_G.Disabled = true
+_G.Attack = true
+
+MainSection:CreateButton("TP Place Zombie Event", function()
+local TeleportService = game:GetService("TeleportService")
+
+local placeId = 103505724406848
+
+local player = game.Players.LocalPlayer
+TeleportService:Teleport(placeId, player)
+end)
+
+MainSection:CreateToggle("Slap Aura Zombie (Beta)", function(state)
+    _G.Attack = state
+
+    local enemyHitCounts = {}
+    local lastHitTime = {}
+    local hitCooldown = 1
+
+    local function resetHitCounts()
+        for enemy, _ in pairs(enemyHitCounts) do
+            enemyHitCounts[enemy] = 0
+        end
+    end
+
+    game:GetService('RunService').RenderStepped:connect(function()
+        if _G.Disabled then
+            while _G.Attack do
+                local enemies = game:GetService('Workspace').Enemies:GetChildren()
+                
+                if #enemies > 0 then
+                    for _, enemy in pairs(enemies) do
+                        if enemy:FindFirstChild("HumanoidRootPart") then
+                            if not enemyHitCounts[enemy] then
+                                enemyHitCounts[enemy] = 0
+                            end
+                            if not lastHitTime[enemy] then
+                                lastHitTime[enemy] = 0
+                            end
+
+                            if enemyHitCounts[enemy] < 15 and tick() - lastHitTime[enemy] >= hitCooldown then
+                                game:GetService("ReplicatedStorage").Remotes.GeneralHit:FireServer(enemy.HumanoidRootPart)
+                                enemyHitCounts[enemy] = enemyHitCounts[enemy] + 1
+                                lastHitTime[enemy] = tick()
+
+                                pcall(function()
+                                    enemy.HumanoidRootPart.Transparency = 0.7
+                                    enemy.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+                                    enemy.HumanoidRootPart.Material = "Neon"
+                                    enemy.HumanoidRootPart.CanCollide = false
+                                end)
+                            end
+                        end
+                    end
+                else
+                    resetHitCounts()
+                end
+                wait()
+            end
+        end
+    end)
+end)
