@@ -11971,7 +11971,7 @@ print("account Age:", accountAge)
 print("Account Creation:", creationDate)
 print("Player Whitelist Approved !")
 print("Script Load !")
-print("Made by Projeto_LKB scriptblox.com")
+print("Made by Projeto_LKB scriptblox.com - roblox: NannaDev (7215575762)")
 wait(0.1)
 local ProjetoLKB = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/Coasting%20Ui%20Lib/source.lua"))()
 
