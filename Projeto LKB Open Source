@@ -11990,12 +11990,6 @@ GG:CreateLabel("", "...")
 GG:CreateLabel("", "Made By Projeto_LKB")
 GG:CreateLabel("", "scriptblox.com")
 
-local player = game.Players.LocalPlayer
-local leaderstats = player:WaitForChild("leaderstats")
-local slapCount = leaderstats:WaitForChild("Slaps")
-local creationDate = os.date("%d/%m/%Y", os.time() - (accountAge * 86400))
-local accountAge = player.AccountAge
-
 local Safe = false
 
 MainSection:CreateToggle("Auto Farm CandyCorns", function(state)
