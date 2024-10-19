@@ -154,3 +154,18 @@ MainSection:CreateToggle("Slap Aura Zombie (Beta)", function(state)
         end
     end)
 end)
+wait(1)
+local player = game.Players.LocalPlayer
+local leaderstats = player:WaitForChild("leaderstats")
+local slapCount = leaderstats:WaitForChild("Slaps")
+local creationDate = os.date("%d/%m/%Y", os.time() - (accountAge * 86400))
+local accountAge = player.AccountAge
+
+print("Player Data Sucess Load !")
+print("Name:", player.Name)
+print("Slaps:", slapCount.Value)
+print("account Age:", accountAge)
+print("Account Creation:", creationDate)
+print("Player Whitelist Approved !")
+print("Script Load !")
+print("Made by Projeto_LKB scriptblox.com")
