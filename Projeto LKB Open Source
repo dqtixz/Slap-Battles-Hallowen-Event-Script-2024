@@ -11959,19 +11959,30 @@
 
 local player = game.Players.LocalPlayer
 local leaderstats = player:WaitForChild("leaderstats") -- Espera até que o leaderstats esteja disponível
-local slapCount = leaderstats:WaitForChild("Slaps") -- Espera até que o valor de Slaps esteja disponível
+
+local slapCount = leaderstats:FindFirstChild("Slaps")
+local ZZZ = leaderstats:FindFirstChild("Points")
 
 local accountAge = player.AccountAge -- Obtém a idade da conta em dias
 local creationDate = os.date("%d/%m/%Y", os.time() - (accountAge * 86400)) -- 86400 segundos em um dia
 
 print("Player Data Sucess Load !")
 print("Name:", player.Name)
-print("Slaps:", slapCount.Value)
+
+if slapCount then
+    print("Slaps:", slapCount.Value)
+elseif ZZZ then
+    print("Points:", ZZZ.Value)
+else
+    print("Slaps And Points Value Not Invalid !")
+end
+
 print("account Age:", accountAge)
 print("Account Creation:", creationDate)
 print("Player Whitelist Approved !")
 print("Script Load !")
 print("Made by Projeto_LKB scriptblox.com - roblox: NannaDev (7215575762)")
+
 wait(0.1)
 local ProjetoLKB = loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostDuckyy/UI-Libraries/main/Coasting%20Ui%20Lib/source.lua"))()
 
