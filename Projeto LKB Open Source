@@ -12019,9 +12019,7 @@ MainSection:CreateToggle("Auto Farm CandyCorns", function(state)
                 else
                     local safe = true
                     if safe == true then
-                        local player = game.Players.LocalPlayer
-                        local character = player.Character or player.CharacterAdded:Wait()
-                        character:SetPrimaryPartCFrame(CFrame.new(-13, 10, -266))
+                        game.Players.LocalPlayer.Character:PivotTo(CFrame.new(Vector3.new(85, -75, -87)))
                     end
                 end
                 wait(_G.cdtp)
