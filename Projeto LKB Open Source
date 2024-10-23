@@ -11992,8 +11992,8 @@ local MainSection = Main:CreateSection("Main")
 local ConfigSection = Main:CreateSection("Config")
 local GG = Credits:CreateSection("Credits Script")
 
-_G.cdtp = 0.1
-_G.cdtp2 = 0.1
+_G.cdtp = 0
+_G.cdtp2 = 0
 _G.Farming = false
 
 GG:CreateLabel("", "...")
